@@ -1,0 +1,41 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const base = import.meta.env.BASE_URL;
+const navLinks = [
+  { href: `${base}`, label: 'ホーム' },
+  { href: `${base}tags`, label: 'タグ' },
+  { href: `${base}about`, label: 'About' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="border-b border-(--color-border)">
+  <div class="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a
+      href={base}
+      class="font-semibold text-lg hover:text-(--color-accent) transition-colors"
+    >
+      imk blog
+    </a>
+    <nav class="flex items-center gap-4">
+      {
+        navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class:list={[
+              'text-sm transition-colors hover:text-(--color-accent)',
+              currentPath === href
+                ? 'text-(--color-accent) font-medium'
+                : 'text-(--color-text-muted)',
+            ]}
+          >
+            {label}
+          </a>
+        ))
+      }
+      <ThemeToggle />
+    </nav>
+  </div>
+</header>

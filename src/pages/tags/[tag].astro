@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import type { InferGetStaticPropsType } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+  return tags.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: posts
+        .filter((post) => post.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }));
+}
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+const { tag } = Astro.params;
+const { posts }: Props = Astro.props;
+---
+
+<BaseLayout
+  title={`#${tag} | imk blog`}
+  description={`タグ「${tag}」の記事一覧`}
+>
+  <h1 class="text-2xl font-bold mb-8">
+    <span class="text-(--color-text-muted) font-normal text-lg">#</span>{tag}
+    <span class="text-base font-normal text-(--color-text-muted) ml-2"
+      >{posts.length}件</span
+    >
+  </h1>
+  {
+    posts.map((post) => (
+      <PostCard
+        id={post.id}
+        title={post.data.title}
+        description={post.data.description}
+        pubDate={post.data.pubDate}
+        tags={post.data.tags}
+      />
+    ))
+  }
+</BaseLayout>

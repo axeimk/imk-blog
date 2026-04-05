@@ -1,0 +1,44 @@
+---
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+  id: string;
+  title: string;
+  description: string;
+  pubDate: Date;
+  tags: string[];
+}
+
+const { id, title, description, pubDate, tags } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<article class="py-6 border-b border-(--color-border) last:border-0">
+  <a href={`${base}blog/${id}`} class="group block">
+    <h2
+      class="text-lg font-semibold group-hover:text-(--color-accent) transition-colors mb-1"
+    >
+      {title}
+    </h2>
+    <p class="text-sm text-(--color-text-muted) mb-2 line-clamp-2">
+      {description}
+    </p>
+  </a>
+  <div class="flex items-center gap-3 text-xs text-(--color-text-muted)">
+    <FormattedDate date={pubDate} />
+    {
+      tags.length > 0 && (
+        <div class="flex gap-1.5 flex-wrap">
+          {tags.map((tag) => (
+            <a
+              href={`${base}tags/${tag}`}
+              class="px-2 py-0.5 rounded-full bg-(--color-border) hover:text-(--color-accent) transition-colors"
+            >
+              #{tag}
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</article>

@@ -1,0 +1,57 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  updatedDate?: Date;
+  tags: string[];
+  heroImage?: string;
+}
+
+const { title, description, pubDate, updatedDate, tags, heroImage } =
+  Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={title} description={description} image={heroImage}>
+  <article>
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold mb-3">{title}</h1>
+      <div
+        class="flex flex-wrap items-center gap-3 text-sm text-(--color-text-muted)"
+      >
+        <FormattedDate date={pubDate} />
+        {
+          updatedDate && (
+            <span>
+              (更新: <FormattedDate date={updatedDate} />)
+            </span>
+          )
+        }
+        {
+          tags.length > 0 && (
+            <div class="flex gap-1.5 flex-wrap">
+              {tags.map((tag) => (
+                <a
+                  href={`${base}tags/${tag}`}
+                  class="px-2 py-0.5 rounded-full bg-(--color-border) hover:text-(--color-accent) transition-colors text-xs"
+                >
+                  #{tag}
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </header>
+
+    <div
+      class="prose dark:prose-invert max-w-none prose-a:text-(--color-accent)"
+    >
+      <slot />
+    </div>
+  </article>
+</BaseLayout>
