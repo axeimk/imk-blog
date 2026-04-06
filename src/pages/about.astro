@@ -31,7 +31,7 @@ const socials = [
       >
         About
       </h1>
-      <div class="w-12 h-[2px]" style="background-color: var(--color-accent);"></div>
+      <div class="w-12 h-0.5" style="background-color: var(--color-accent);"></div>
     </header>
 
     <!-- プロフィールカード -->
@@ -77,9 +77,23 @@ const socials = [
       </div>
     </div>
 
-    <!-- ブログ説明 -->
-    <div class="prose dark:prose-invert max-w-none prose-a:text-(--color-accent)">
-      <p>このブログは日々の技術的な学びやメモ、考えをまとめる場所です。</p>
-    </div>
+    <!-- このブログについて -->
+    <section class="mb-12">
+      <h2
+        class="font-serif text-2xl font-bold mb-2"
+        style="font-family: 'Noto Serif JP', serif;"
+      >
+        このブログについて
+      </h2>
+      <div class="w-8 h-0.5 mb-6" style="background-color: var(--color-accent);"></div>
+      <div class="prose dark:prose-invert max-w-none prose-a:text-(--color-accent)">
+        <p>
+          「供養ログ」は、学んだことや試したことを書き留めておく場所です。途中で終わったこと、うまくいかなかったこと、気になったまま放置していたこと——そういうものを供養するような気持ちで書いています。
+        </p>
+        <p>
+          主にWeb開発・プログラミング・ツールなどの技術的な話題を扱いますが、それ以外のことも気が向いたときに書きます。
+        </p>
+      </div>
+    </section>
   </article>
 </BaseLayout>
