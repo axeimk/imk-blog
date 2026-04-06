@@ -1,43 +1,79 @@
-# Astro Starter Kit: Minimal
+# 供養ログ
 
-```sh
-npm create astro@latest -- --template minimal
-```
+axeimk による日本語の技術ブログ風チラシの裏。Astro v6 + Tailwind CSS v4 で構築し、GitHub Pages にデプロイする静的サイト。
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+**URL:** https://blog.axeimk.dev/
 
-## 🚀 Project Structure
+## 技術スタック
 
-Inside of your Astro project, you'll see the following folders and files:
+| 項目 | 内容 |
+| :--- | :--- |
+| フレームワーク | Astro v6 |
+| スタイリング | Tailwind CSS v4 |
+| 言語 | TypeScript |
+| デプロイ | GitHub Actions → GitHub Pages |
+| Node.js | >= 22.12.0 |
+
+## 主な機能
+
+- ダーク / ライトモード切替
+- タグによる記事分類・一覧ページ
+- RSS フィード (`/rss.xml`)
+- サイトマップ自動生成
+- ドラフト記事（`draft: true` でビルド除外）
+
+## プロジェクト構成
 
 ```text
 /
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+├── .github/workflows/deploy.yml   # GitHub Pages へのデプロイ
+├── public/                        # 静的アセット (favicon, CNAME)
+└── src/
+    ├── components/                # 共通コンポーネント
+    ├── content/blog/              # Markdown 記事
+    ├── content.config.ts          # コンテンツスキーマ定義
+    ├── layouts/                   # BaseLayout, PostLayout
+    ├── pages/                     # ルーティング
+    └── styles/global.css          # テーマ変数・ダークモード定義
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## コマンド
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```bash
+npm run dev           # 開発サーバー起動 (localhost:4321)
+npm run build         # 本番ビルド (./dist/)
+npm run preview       # ビルド結果のプレビュー
+npm run lint          # ESLint
+npm run format        # Prettier フォーマット
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 記事の追加
 
-## 🧞 Commands
+`src/content/blog/` に Markdown ファイルを作成する。
 
-All commands are run from the root of the project, from a terminal:
+```markdown
+---
+title: "記事タイトル"
+description: "記事の概要"
+pubDate: 2026-01-01
+tags: ["tag1", "tag2"]   # 任意
+draft: true              # 任意: true にするとビルド除外
+heroImage: "./hero.png"  # 任意
+---
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+本文...
+```
 
-## 👀 Want to learn more?
+| フィールド | 必須 | 説明 |
+| :--- | :---: | :--- |
+| `title` | ○ | 記事タイトル |
+| `description` | ○ | 記事の概要 |
+| `pubDate` | ○ | 公開日 |
+| `updatedDate` | - | 更新日 |
+| `tags` | - | タグの配列 |
+| `draft` | - | `true` でビルド除外 |
+| `heroImage` | - | アイキャッチ画像 |
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## デプロイ
+
+`main` ブランチへのプッシュで GitHub Actions が自動実行され、GitHub Pages にデプロイされる。カスタムドメインは `public/CNAME` で設定。

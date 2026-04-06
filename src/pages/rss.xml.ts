@@ -8,7 +8,7 @@ export async function GET(context: APIContext) {
   );
 
   return rss({
-    title: 'imk blog',
+    title: '供養ログ',
     description: '日々の技術メモや考えをまとめたブログ',
     site: context.site!,
     items: posts.map((post) => ({
