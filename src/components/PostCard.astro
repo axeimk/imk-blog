@@ -13,14 +13,18 @@ const { id, title, description, pubDate, tags } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
 
-<article class="py-6 border-b border-(--color-border) last:border-0">
-  <a href={`${base}blog/${id}`} class="group block">
+<article
+  class="group relative rounded-lg p-5 border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+  style="background-color: var(--color-bg-surface); border-color: var(--color-border);"
+>
+  <a href={`${base}blog/${id}`} class="block">
     <h2
-      class="text-lg font-semibold group-hover:text-(--color-accent) transition-colors mb-1"
+      class="font-serif text-lg font-bold mb-2 transition-colors group-hover:text-(--color-accent) leading-snug"
+      style="font-family: 'Noto Serif JP', serif;"
     >
       {title}
     </h2>
-    <p class="text-sm text-(--color-text-muted) mb-2 line-clamp-2">
+    <p class="text-sm text-(--color-text-muted) mb-4 line-clamp-2 leading-relaxed">
       {description}
     </p>
   </a>
@@ -32,7 +36,8 @@ const base = import.meta.env.BASE_URL;
           {tags.map((tag) => (
             <a
               href={`${base}tags/${tag}`}
-              class="px-2 py-0.5 rounded-full bg-(--color-border) hover:text-(--color-accent) transition-colors"
+              class="px-2 py-0.5 text-xs font-medium border-l-2 transition-colors hover:text-(--color-accent)"
+              style="background-color: var(--color-accent-soft); color: var(--color-accent); border-color: var(--color-accent);"
             >
               #{tag}
             </a>
@@ -41,4 +46,9 @@ const base = import.meta.env.BASE_URL;
       )
     }
   </div>
+  <!-- ホバー時の左アクセントバー -->
+  <div
+    class="absolute left-0 top-3 bottom-3 w-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+    style="background-color: var(--color-accent);"
+  ></div>
 </article>

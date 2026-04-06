@@ -11,29 +11,34 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="border-b border-(--color-border)">
-  <div class="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
+<header class="border-b" style="border-color: color-mix(in srgb, var(--color-border) 70%, transparent);">
+  <div class="max-w-4xl mx-auto px-6 py-5 flex items-center justify-between">
     <a
       href={base}
-      class="font-semibold text-lg hover:text-(--color-accent) transition-colors"
+      class="font-serif font-bold text-xl tracking-tight transition-colors hover:text-(--color-accent)"
+      style="font-family: 'Noto Serif JP', serif;"
     >
       imk blog
     </a>
-    <nav class="flex items-center gap-4">
+    <nav class="flex items-center gap-5">
       {
-        navLinks.map(({ href, label }) => (
-          <a
-            href={href}
-            class:list={[
-              'text-sm transition-colors hover:text-(--color-accent)',
-              currentPath === href
-                ? 'text-(--color-accent) font-medium'
-                : 'text-(--color-text-muted)',
-            ]}
-          >
-            {label}
-          </a>
-        ))
+        navLinks.map(({ href, label }) => {
+          const isActive = currentPath === href;
+          return (
+            <a
+              href={href}
+              class:list={[
+                'relative text-sm pb-0.5 transition-colors',
+                'after:absolute after:bottom-0 after:left-0 after:h-[2px] after:transition-all after:duration-300',
+                isActive
+                  ? 'text-(--color-accent) font-medium after:w-full after:bg-(--color-accent)'
+                  : 'text-(--color-text-muted) hover:text-(--color-text) after:w-0 hover:after:w-full after:bg-(--color-accent)',
+              ]}
+            >
+              {label}
+            </a>
+          );
+        })
       }
       <ThemeToggle />
     </nav>

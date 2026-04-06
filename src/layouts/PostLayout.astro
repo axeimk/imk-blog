@@ -17,11 +17,23 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={title} description={description} image={heroImage}>
-  <article>
-    <header class="mb-8">
-      <h1 class="text-3xl font-bold mb-3">{title}</h1>
+  <article class="max-w-3xl mx-auto">
+    {
+      heroImage && (
+        <div class="rounded-xl overflow-hidden mb-10">
+          <img src={heroImage} alt={title} class="w-full object-cover" />
+        </div>
+      )
+    }
+    <header class="mb-10">
+      <h1
+        class="font-serif text-4xl md:text-5xl font-bold leading-tight mb-5"
+        style="font-family: 'Noto Serif JP', serif;"
+      >
+        {title}
+      </h1>
       <div
-        class="flex flex-wrap items-center gap-3 text-sm text-(--color-text-muted)"
+        class="flex flex-wrap items-center gap-3 text-sm text-(--color-text-muted) mb-6"
       >
         <FormattedDate date={pubDate} />
         {
@@ -37,7 +49,8 @@ const base = import.meta.env.BASE_URL;
               {tags.map((tag) => (
                 <a
                   href={`${base}tags/${tag}`}
-                  class="px-2 py-0.5 rounded-full bg-(--color-border) hover:text-(--color-accent) transition-colors text-xs"
+                  class="px-2 py-0.5 text-xs font-medium border-l-2 transition-colors hover:opacity-80"
+                  style="background-color: var(--color-accent-soft); color: var(--color-accent); border-color: var(--color-accent);"
                 >
                   #{tag}
                 </a>
@@ -46,11 +59,13 @@ const base = import.meta.env.BASE_URL;
           )
         }
       </div>
+      <div
+        class="w-16 h-[2px]"
+        style="background-color: var(--color-accent);"
+      ></div>
     </header>
 
-    <div
-      class="prose dark:prose-invert max-w-none prose-a:text-(--color-accent)"
-    >
+    <div class="prose dark:prose-invert max-w-none">
       <slot />
     </div>
   </article>

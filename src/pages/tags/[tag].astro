@@ -26,21 +26,32 @@ const { posts }: Props = Astro.props;
   title={`#${tag} | imk blog`}
   description={`タグ「${tag}」の記事一覧`}
 >
-  <h1 class="text-2xl font-bold mb-8">
-    <span class="text-(--color-text-muted) font-normal text-lg">#</span>{tag}
-    <span class="text-base font-normal text-(--color-text-muted) ml-2"
-      >{posts.length}件</span
+  <header class="mb-10">
+    <h1
+      class="font-serif text-3xl font-bold mb-3"
+      style="font-family: 'Noto Serif JP', serif;"
     >
-  </h1>
-  {
-    posts.map((post) => (
-      <PostCard
-        id={post.id}
-        title={post.data.title}
-        description={post.data.description}
-        pubDate={post.data.pubDate}
-        tags={post.data.tags}
-      />
-    ))
-  }
+      <span style="color: var(--color-text-muted); font-weight: 400; font-size: 0.75em;">#</span>{tag}
+      <span class="text-base font-normal ml-2" style="color: var(--color-text-muted);">{posts.length}件</span>
+    </h1>
+    <div
+      class="w-12 h-[2px]"
+      style="background-color: var(--color-accent); animation: accent-line-grow 0.6s ease 0.3s both;"
+    ></div>
+  </header>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    {
+      posts.map((post, i) => (
+        <div style={`animation: fade-in-up 0.4s ease both; animation-delay: ${i * 0.06}s;`}>
+          <PostCard
+            id={post.id}
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            tags={post.data.tags}
+          />
+        </div>
+      ))
+    }
+  </div>
 </BaseLayout>
