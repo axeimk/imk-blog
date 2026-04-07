@@ -19,14 +19,11 @@ const base = import.meta.env.BASE_URL;
 >
   <a href={`${base}posts/${id}`} class="block">
     <h2
-      class="font-serif text-lg font-bold mb-2 transition-colors group-hover:text-(--color-accent) leading-snug"
+      class="font-serif text-lg font-bold mb-2 transition-colors group-hover:text-(--color-accent) leading-snug min-h-[3.25rem] line-clamp-2"
       style="font-family: 'Noto Serif JP', serif;"
     >
       {title}
     </h2>
-    <p class="text-sm text-(--color-text-muted) mb-4 line-clamp-2 leading-relaxed">
-      {description}
-    </p>
   </a>
   <div class="flex items-center gap-3 text-xs text-(--color-text-muted)">
     <FormattedDate date={pubDate} />
