@@ -144,6 +144,24 @@ body::before {
   margin-bottom: 0.6em;
 }
 
+/* インラインコード（pre 内は除外） */
+.prose :where(code):not(:where(pre code)) {
+  font-family: ui-monospace, 'SFMono-Regular', 'Menlo', 'Consolas', monospace;
+  font-size: 0.88em;
+  font-weight: 600;
+  color: var(--color-accent);
+  background-color: var(--color-accent-soft);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  margin: 0 0.15em;
+}
+
+.prose :where(code)::before,
+.prose :where(code)::after {
+  content: none;
+}
+
 /* コードブロック: 言語ラベル & コピーボタン */
 .prose pre {
   position: relative;
