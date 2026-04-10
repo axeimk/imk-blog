@@ -113,3 +113,59 @@ body::before {
 .prose :where(h1, h2, h3, h4, h5, h6) {
   font-family: 'Noto Serif JP', serif;
 }
+
+/* コードブロック: 言語ラベル & コピーボタン */
+.prose pre {
+  position: relative;
+}
+
+.prose pre[data-language] {
+  padding-top: 2.25rem;
+}
+
+.prose pre[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5rem;
+  left: 0.9rem;
+  font-size: 0.7rem;
+  font-family: var(--font-sans);
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  pointer-events: none;
+}
+
+.prose pre .copy-button {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.7rem;
+  font-family: var(--font-sans);
+  color: var(--color-text-muted);
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.prose pre:hover .copy-button,
+.prose pre .copy-button:focus-visible {
+  opacity: 1;
+}
+
+.prose pre .copy-button:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.prose pre .copy-button[data-copied='true'] {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  opacity: 1;
+}
