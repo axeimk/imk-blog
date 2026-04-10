@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { post }: Props = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 ---
 
 <PostLayout
@@ -23,6 +23,7 @@ const { Content } = await render(post);
   updatedDate={post.data.updatedDate}
   tags={post.data.tags}
   heroImage={post.data.heroImage}
+  headings={headings}
 >
   <Content />
 </PostLayout>

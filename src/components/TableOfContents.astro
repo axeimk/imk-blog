@@ -1,0 +1,75 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
+
+type TocNode = { slug: string; text: string; children: TocNode[] };
+const tree: TocNode[] = [];
+for (const h of toc) {
+  if (h.depth === 2) {
+    tree.push({ slug: h.slug, text: h.text, children: [] });
+  } else {
+    const last = tree[tree.length - 1];
+    if (last) {
+      last.children.push({ slug: h.slug, text: h.text, children: [] });
+    } else {
+      tree.push({ slug: h.slug, text: h.text, children: [] });
+    }
+  }
+}
+
+const shouldRender = toc.length >= 2;
+---
+
+{
+  shouldRender && (
+    <nav
+      class="not-prose mb-10 p-5 rounded-lg border"
+      style="background-color: var(--color-bg-surface); border-color: var(--color-border);"
+      aria-label="目次"
+    >
+      <details open>
+        <summary
+          class="cursor-pointer font-bold text-sm tracking-wide select-none"
+          style="color: var(--color-text-muted); font-family: var(--font-serif);"
+        >
+          目次
+        </summary>
+        <ol class="mt-4 space-y-2 text-sm leading-relaxed list-none pl-0">
+          {tree.map((h2) => (
+            <li>
+              <a
+                href={`#${h2.slug}`}
+                class="block border-l-2 pl-3 py-0.5 transition-colors hover:opacity-80"
+                style="border-color: var(--color-accent); color: var(--color-text);"
+              >
+                {h2.text}
+              </a>
+              {h2.children.length > 0 && (
+                <ol class="mt-1.5 ml-4 space-y-1.5 list-none pl-0">
+                  {h2.children.map((h3) => (
+                    <li>
+                      <a
+                        href={`#${h3.slug}`}
+                        class="block text-xs border-l pl-3 py-0.5 transition-colors hover:opacity-80"
+                        style="border-color: var(--color-border); color: var(--color-text-muted);"
+                      >
+                        {h3.text}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </li>
+          ))}
+        </ol>
+      </details>
+    </nav>
+  )
+}
