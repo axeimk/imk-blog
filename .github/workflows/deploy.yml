@@ -35,3 +35,20 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  notify:
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Notify Discord
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          status: ${{ needs.deploy.result == 'success' && 'success' || (needs.build.result == 'failure' || needs.deploy.result == 'failure') && 'failure' || 'cancelled' }}
+          title: "供養ログ デプロイ"
+          description: |
+            ブランチ: `${{ github.ref_name }}`
+            コミット: `${{ github.sha }}`
+          url: https://blog.axeimk.dev/
+          username: GitHub Actions
