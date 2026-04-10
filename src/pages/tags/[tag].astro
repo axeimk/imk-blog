@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import type { InferGetStaticPropsType } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
+import { getExcerpt } from '../../utils/excerpt';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -39,14 +40,14 @@ const { posts }: Props = Astro.props;
       style="background-color: var(--color-accent); animation: accent-line-grow 0.6s ease 0.3s both;"
     ></div>
   </header>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+  <div class="grid grid-cols-1 gap-5">
     {
       posts.map((post, i) => (
         <div style={`animation: fade-in-up 0.4s ease both; animation-delay: ${i * 0.06}s;`}>
           <PostCard
             id={post.id}
             title={post.data.title}
-            description={post.data.description}
+            excerpt={getExcerpt(post.body ?? '')}
             pubDate={post.data.pubDate}
             tags={post.data.tags}
           />
