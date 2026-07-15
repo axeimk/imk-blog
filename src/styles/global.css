@@ -183,6 +183,23 @@ body::before {
   pointer-events: none;
 }
 
+.prose pre[data-language='markdown']::before {
+  content: 'Markdown';
+}
+
+.prose pre[data-language='bash']::before,
+.prose pre[data-language='shell']::before {
+  content: 'Shell';
+}
+
+.prose pre[data-language='python']::before {
+  content: 'Python';
+}
+
+.prose pre[data-language='typescript']::before {
+  content: 'TypeScript';
+}
+
 .prose pre .copy-button {
   position: absolute;
   top: 0.4rem;
