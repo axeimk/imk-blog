@@ -1,18 +1,18 @@
 # 供養ログ
 
-axeimk による日本語の技術ブログ風チラシの裏。Astro v6 + Tailwind CSS v4 で構築し、GitHub Pages にデプロイする静的サイト。
+axeimk による日本語の技術ブログ風チラシの裏。Astro v7 + Tailwind CSS v4 で構築し、GitHub Pages にデプロイする静的サイト。
 
 **URL:** https://blog.axeimk.dev/
 
 ## 技術スタック
 
-| 項目 | 内容 |
-| :--- | :--- |
-| フレームワーク | Astro v6 |
-| スタイリング | Tailwind CSS v4 |
-| 言語 | TypeScript |
-| デプロイ | GitHub Actions → GitHub Pages |
-| Node.js | >= 22.12.0 |
+| 項目           | 内容                          |
+| :------------- | :---------------------------- |
+| フレームワーク | Astro v7                      |
+| スタイリング   | Tailwind CSS v4               |
+| 言語           | TypeScript                    |
+| デプロイ       | GitHub Actions → GitHub Pages |
+| Node.js        | >= 22.12.0                    |
 
 ## 主な機能
 
@@ -53,26 +53,26 @@ npm run format        # Prettier フォーマット
 
 ```markdown
 ---
-title: "記事タイトル"
-description: "記事の概要"
+title: '記事タイトル'
+description: '記事の概要'
 pubDate: 2026-01-01
-tags: ["tag1", "tag2"]   # 任意
-draft: true              # 任意: true にするとビルド除外
-heroImage: "./hero.png"  # 任意
+tags: ['tag1', 'tag2'] # 任意
+draft: true # 任意: true にするとビルド除外
+heroImage: './hero.png' # 任意
 ---
 
 本文...
 ```
 
-| フィールド | 必須 | 説明 |
-| :--- | :---: | :--- |
-| `title` | ○ | 記事タイトル |
-| `description` | ○ | 記事の概要 |
-| `pubDate` | ○ | 公開日 |
-| `updatedDate` | - | 更新日 |
-| `tags` | - | タグの配列 |
-| `draft` | - | `true` でビルド除外 |
-| `heroImage` | - | アイキャッチ画像 |
+| フィールド    | 必須 | 説明                |
+| :------------ | :--: | :------------------ |
+| `title`       |  ○   | 記事タイトル        |
+| `description` |  ○   | 記事の概要          |
+| `pubDate`     |  ○   | 公開日              |
+| `updatedDate` |  -   | 更新日              |
+| `tags`        |  -   | タグの配列          |
+| `draft`       |  -   | `true` でビルド除外 |
+| `heroImage`   |  -   | アイキャッチ画像    |
 
 ## デプロイ
 
