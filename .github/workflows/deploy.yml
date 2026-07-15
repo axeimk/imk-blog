@@ -23,7 +23,7 @@ jobs:
       - name: Install, build, and upload
         uses: withastro/action@v3
         with:
-          node-version: 22
+          node-version: 24
 
   deploy:
     needs: build
@@ -46,7 +46,7 @@ jobs:
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
           status: ${{ needs.deploy.result == 'success' && 'success' || (needs.build.result == 'failure' || needs.deploy.result == 'failure') && 'failure' || 'cancelled' }}
-          title: "供養ログ デプロイ"
+          title: '供養ログ デプロイ'
           description: |
             ブランチ: `${{ github.ref_name }}`
             コミット: `${{ github.sha }}`

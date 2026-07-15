@@ -12,7 +12,7 @@ axeimk による日本語の技術ブログ風チラシの裏。Astro v7 + Tailw
 | スタイリング   | Tailwind CSS v4               |
 | 言語           | TypeScript                    |
 | デプロイ       | GitHub Actions → GitHub Pages |
-| Node.js        | >= 22.12.0                    |
+| Node.js        | ^24.18.0                      |
 
 ## 主な機能
 
