@@ -112,4 +112,28 @@ const base = import.meta.env.BASE_URL;
     });
   };
   setupCopyButtons();
+
+  const setupLightbox = () => {
+    const images = document.querySelectorAll<HTMLImageElement>('.prose img');
+    if (images.length === 0) return;
+
+    const dialog = document.createElement('dialog');
+    dialog.className = 'lightbox';
+    dialog.setAttribute('aria-label', '画像の拡大表示');
+    const zoomed = document.createElement('img');
+    dialog.appendChild(zoomed);
+    dialog.addEventListener('click', () => dialog.close());
+    document.body.appendChild(dialog);
+
+    images.forEach((img) => {
+      if (img.closest('a')) return;
+      img.classList.add('zoomable');
+      img.addEventListener('click', () => {
+        zoomed.src = img.currentSrc || img.src;
+        zoomed.alt = img.alt;
+        dialog.showModal();
+      });
+    });
+  };
+  setupLightbox();
 </script>
