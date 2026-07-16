@@ -236,8 +236,9 @@ body::before {
 }
 
 /* 記事内画像: クリックで拡大表示 */
+/* zoom-in/zoom-out は macOS Chrome 150 でホバー移動時に描画されないため pointer を使う */
 .prose img.zoomable {
-  cursor: zoom-in;
+  cursor: pointer;
 }
 
 .lightbox {
@@ -248,7 +249,7 @@ body::before {
   padding: 1.5rem;
   background: transparent;
   border: none;
-  cursor: zoom-out;
+  cursor: pointer;
 }
 
 .lightbox[open] {
