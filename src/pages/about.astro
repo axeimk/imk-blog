@@ -31,7 +31,8 @@ const socials = [
       >
         About
       </h1>
-      <div class="w-12 h-0.5" style="background-color: var(--color-accent);"></div>
+      <div class="w-12 h-0.5" style="background-color: var(--color-accent);">
+      </div>
     </header>
 
     <!-- プロフィールカード -->
@@ -63,7 +64,9 @@ const socials = [
               <a
                 href={href}
                 target={href.startsWith('http') ? '_blank' : undefined}
-                rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                rel={
+                  href.startsWith('http') ? 'noopener noreferrer' : undefined
+                }
                 aria-label={label}
                 class="p-2 rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:text-(--color-accent)"
                 style="color: var(--color-text-muted); background-color: var(--color-bg);"
@@ -85,8 +88,14 @@ const socials = [
       >
         このブログについて
       </h2>
-      <div class="w-8 h-0.5 mb-6" style="background-color: var(--color-accent);"></div>
-      <div class="prose dark:prose-invert max-w-none prose-a:text-(--color-accent)">
+      <div
+        class="w-8 h-0.5 mb-6"
+        style="background-color: var(--color-accent);"
+      >
+      </div>
+      <div
+        class="prose dark:prose-invert max-w-none prose-a:text-(--color-accent)"
+      >
         <p>
           「供養ログ」は、学んだことや試したことを書き留めておく場所です。途中で終わったこと、うまくいかなかったこと、気になったまま放置していたこと——そういうものを供養するような気持ちで書いています。
         </p>

@@ -15,12 +15,12 @@ AIがコードを書くようになっても、Webアプリケーションを狙
 
 > **OWASPとは**: OWASP（Open Worldwide Application Security Project）は、Webアプリケーションのセキュリティ向上を目的とした国際的な非営利コミュニティです。中でも「OWASP Top 10」は、最も重大なWebアプリケーションのセキュリティリスクを数年ごとにランキング形式で公開しているドキュメントで、業界標準のリファレンスとして広く参照されています。
 
-| 順位 | カテゴリ | 変化 |
-|------|---------|------|
-| A01 | Broken Access Control（アクセス制御の不備） | 2025年も1位を維持 |
-| A02 | Security Misconfiguration（セキュリティ設定の不備） | 5位から上昇 |
-| A03 | Software Supply Chain Failures（サプライチェーンの問題） | 2025年から新規追加 |
-| A05 | Injection（SQLインジェクション、XSSなど） | 3位から下降、依然Top 5 |
+| 順位 | カテゴリ                                                 | 変化                   |
+| ---- | -------------------------------------------------------- | ---------------------- |
+| A01  | Broken Access Control（アクセス制御の不備）              | 2025年も1位を維持      |
+| A02  | Security Misconfiguration（セキュリティ設定の不備）      | 5位から上昇            |
+| A03  | Software Supply Chain Failures（サプライチェーンの問題） | 2025年から新規追加     |
+| A05  | Injection（SQLインジェクション、XSSなど）                | 3位から下降、依然Top 5 |
 
 AI生成コードにおいても、SQLインジェクションやXSSといった古典的なインジェクション系の脆弱性は依然として多く確認されています。AIはデモ向けの緩い設定（許可的なロギング、広範なネットワークバインディング、緩いバリデーション）をそのまま本番コードに持ち込みやすい傾向があります。
 
@@ -32,7 +32,9 @@ AIにデータベース操作のコードを頼むと、ユーザー入力をそ
 
 ```typescript
 // AIが生成しがちな危険なコード — sql.raw()はエスケープされない
-const result = await db.execute(sql`SELECT * FROM users WHERE name = ${sql.raw(userInput)}`);
+const result = await db.execute(
+  sql`SELECT * FROM users WHERE name = ${sql.raw(userInput)}`,
+);
 
 // Drizzleのクエリビルダを使えばプレースホルダ化される
 const result = await db.select().from(users).where(eq(users.name, userInput));

@@ -4,8 +4,14 @@ const base = import.meta.env.BASE_URL;
 
 <footer class="mt-20" style="border-top: 1px solid var(--color-border);">
   <div class="max-w-4xl mx-auto px-6 py-8">
-    <div class="w-10 h-[2px] mb-5" style="background-color: var(--color-accent);"></div>
-    <div class="flex items-center justify-between text-sm text-(--color-text-muted)">
+    <div
+      class="w-10 h-[2px] mb-5"
+      style="background-color: var(--color-accent);"
+    >
+    </div>
+    <div
+      class="flex items-center justify-between text-sm text-(--color-text-muted)"
+    >
       <span>&copy; {new Date().getFullYear()} 供養ログ</span>
       <a
         href={`${base}rss.xml`}

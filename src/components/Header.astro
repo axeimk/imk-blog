@@ -11,7 +11,10 @@ const navLinks = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="border-b" style="border-color: color-mix(in srgb, var(--color-border) 70%, transparent);">
+<header
+  class="border-b"
+  style="border-color: color-mix(in srgb, var(--color-border) 70%, transparent);"
+>
   <div class="max-w-4xl mx-auto px-6 py-5 flex items-center justify-between">
     <a
       href={base}
